@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goldgov.codepractice.exercise.dao.ExerciseDao">
+	<resultMap type="com.goldgov.codepractice.exercise.service.Exercise" id="exercise">
+	<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
+	<result column="CATEGORY" jdbcType="NUMERIC" property="category"/>
+	<result column="CONSTRAINTS" jdbcType="VARCHAR" property="constraints"/>
+	<result column="DEFINITION_CLASS" jdbcType="VARCHAR" property="definitionClass"/>
+	<result column="DEFINITION_METHOD" jdbcType="VARCHAR" property="definitionMethod"/>
+	<result column="DEFINITION_PARAMS" jdbcType="VARCHAR" property="definitionParams"/>
+	<result column="DEFINITION_RETURN" jdbcType="VARCHAR" property="definitionReturn"/>
+	<result column="DIFFICULTY" jdbcType="NUMERIC" property="difficulty"/>
+	<result column="EXAMPLE" jdbcType="VARCHAR" property="example"/>
+	<result column="NOTE" jdbcType="VARCHAR" property="note"/>
+	<result column="PUBLISH_DATE" jdbcType="TIMESTAMP" property="publishDate"/>
+	<result column="SCORE_POINT" jdbcType="NUMERIC" property="scorePoint"/>
+	<result column="STATEMENT" jdbcType="VARCHAR" property="statement"/>
+	<result column="TIME_LIMIT" jdbcType="NUMERIC" property="timeLimit"/>
+	<result column="TITLE" jdbcType="VARCHAR" property="title"/>
+</resultMap>
+
+	<insert id="addExercise" keyProperty="exerciseID" useGeneratedKeys="true">
+		INSERT INTO EXERCISE (CATEGORY,CONSTRAINTS,DEFINITION_CLASS,DEFINITION_METHOD,DEFINITION_PARAMS,DEFINITION_RETURN,DIFFICULTY,EXAMPLE,NOTE,PUBLISH_DATE,SCORE_POINT,STATEMENT,TIME_LIMIT,TITLE) VALUES (#{category},#{constraints},#{definitionClass},#{definitionMethod},#{definitionParams},#{definitionReturn},#{difficulty},#{example},#{note},#{publishDate},#{scorePoint},#{statement},#{timeLimit},#{title});
+	</insert>
+	
+	<update id="updateExercise">
+		update EXERCISE
+		<set>
+			<if test="category != null ">CATEGORY = #{category},</if>
+			<if test="constraints != null ">CONSTRAINTS = #{constraints},</if>
+			<if test="definitionClass != null ">DEFINITION_CLASS = #{definitionClass},</if>
+			<if test="definitionMethod != null ">DEFINITION_METHOD = #{definitionMethod},</if>
+			<if test="definitionParams != null ">DEFINITION_PARAMS = #{definitionParams},</if>
+			<if test="definitionReturn != null ">DEFINITION_RETURN = #{definitionReturn},</if>
+			<if test="difficulty != null ">DIFFICULTY = #{difficulty},</if>
+			<if test="example != null ">EXAMPLE = #{example},</if>
+			<if test="note != null ">NOTE = #{note},</if>
+			<if test="publishDate != null ">PUBLISH_DATE = #{publishDate},</if>
+			<if test="scorePoint != null ">SCORE_POINT = #{scorePoint},</if>
+			<if test="statement != null ">STATEMENT = #{statement},</if>
+			<if test="timeLimit != null ">TIME_LIMIT = #{timeLimit},</if>
+			<if test="title != null ">TITLE = #{title},</if>
+		</set>
+		where EXERCISE_ID=#{exerciseID}
+	</update>
+	
+	<delete id="deleteExercises">
+		delete from EXERCISE where EXERCISE_ID in
+		<foreach item="id" index="index" collection="userIDs" open="(" separator="," close=")">
+		   #{id}
+		</foreach>
+	</delete>
+	
+	<select id="findExerciseByID" resultMap="exercise">
+		SELECT * FROM EXERCISE WHERE EXERCISE_ID=#{exerciseID};
+	</select>
+	
+	<select id="findExercises" resultMap="exercise">
+		SELECT * FROM EXERCISE
+	</select>
+	
+</mapper>

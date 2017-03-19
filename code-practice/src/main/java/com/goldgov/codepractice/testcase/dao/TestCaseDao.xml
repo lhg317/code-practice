@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goldgov.codepractice.testcase.dao.TestCaseDao">
+
+	<resultMap type="com.goldgov.codepractice.testcase.service.TestCase" id="testCase">
+		<result column="TEST_CASE_ID" jdbcType="NUMERIC" property="testCaseID"/>
+		<result column="PARAM_VALUES" jdbcType="VARCHAR" property="paramValues"/>
+		<result column="RETURN_VALUE" jdbcType="VARCHAR" property="returnValue"/>
+	</resultMap>
+
+	<insert id="addTestCases" keyProperty="userID" useGeneratedKeys="true">
+		INSERT INTO TEST_CASE (PARAM_VALUES,RETURN_VALUE,EXERCISE_ID) VALUES 
+		<foreach item="case" index="index" collection="testCases" separator="," >
+		   (#{case.paramValues},#{case.returnValue},#{exerciseID})
+		</foreach>
+	</insert>
+	
+	<update id="updateTestCase">
+		update TEST_CASE
+		<set>
+			<if test="paramValues != null ">PARAM_VALUES = #{testCase.paramValues},</if>
+			<if test="returnValue != null ">RETURN_VALUE = #{testCase.returnValue},</if>
+		</set>
+		where TEST_CASE_ID=#{testCaseID}
+	</update>
+	
+	<delete id="deleteTestCase">
+		delete from TEST_CASE where TEST_CASE_ID in
+		<foreach item="id" index="index" collection="userIDs" open="(" separator="," close=")">
+		   #{id}
+		</foreach>
+	</delete>
+	
+	<select id="findTestCases" resultMap="testCase">
+		SELECT * FROM TEST_CASE WHERE EXERCISE_ID=#{exerciseID};
+	</select>
+	
+</mapper>
