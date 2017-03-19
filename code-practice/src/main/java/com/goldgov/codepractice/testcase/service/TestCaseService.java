@@ -6,6 +6,6 @@ public interface TestCaseService {
 
 	void addTestCases(Integer exerciseID,List<TestCase> testCases);
 	void updateTestCase(Integer exerciseID,TestCase testCase);
-	void deleteTestCase(Integer[] ids);
+	void deleteTestCases(Integer[] ids);
 	List<TestCase> findTestCases(Integer exerciseID);
 }
