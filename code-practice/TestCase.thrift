@@ -18,7 +18,7 @@ struct RpcTestCaseQuery {
 
 service RpcTestCaseService {
 	void addTestCases(1:i32 exerciseID,2:list<RpcTestCase> testCase);
-	void deleteTestCase(1:list<i32> ids);
+	void deleteTestCases(1:list<i32> ids);
 	void updateTestCase(1:i32 exerciseID,2:RpcTestCase testCase);
 	list<RpcTestCase> findTestCases(1:i32 exerciseID);
 }
