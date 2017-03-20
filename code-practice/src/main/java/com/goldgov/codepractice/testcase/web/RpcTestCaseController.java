@@ -27,15 +27,9 @@ public class RpcTestCaseController {
 	private RpcTestCaseService.Iface testCaseService;
 	
 	
-//	@RequestMapping("/preAdd")
-//	@WebToken(handle=TokenHandleType.GENERATE)
-//	public String preAdd(){
-//		return PAGES_BASE_PATH + "form";
-//	}
-	
 	@RequestMapping("/add")
 	@WebToken(handle=TokenHandleType.VERIFY)
-	public String addTestCase(@RequestParam("exerciseID") Integer exerciseID,RpcTestCase[] testCases) throws TException{
+	public String addTestCase(@RequestParam("exerciseID") Integer exerciseID,RpcTestCase testCases) throws TException{
 		testCaseService.addTestCases(exerciseID, Arrays.asList(testCases));
 		return "forward:/testcase/findList";
 	}
@@ -50,7 +44,7 @@ public class RpcTestCaseController {
 	@RequestMapping("/delete")
 	public String deleteExercises(@RequestParam("ids")Integer[] ids) throws TException{
 		testCaseService.deleteTestCases(Arrays.asList(ids));
-		return "forward:/exercise/findList";
+		return "forward:/testcase/findList";
 	}
 	
 	@RequestMapping("/findList")
