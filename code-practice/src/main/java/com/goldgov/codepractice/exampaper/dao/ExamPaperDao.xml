@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goldgov.codepractice.exampaper.dao.ExamPaperDao">
+
+	<resultMap type="com.goldgov.codepractice.exampaper.service.ExamPaper" id="examPaper">
+		<result column="CODE_CONTENT" jdbcType="VARCHAR" property="codeContent"/>
+		<result column="COMPILED_SUCCESS" jdbcType="NUMERIC" property="compiledSuccess"/>
+		<result column="EXAM_PAPER_ID" jdbcType="NUMERIC" property="examPaperID"/>
+		<result column="EXAMINEE_ID" jdbcType="VARCHAR" property="examineeID"/>
+		<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
+		<result column="SCORE_POINT" jdbcType="NUMERIC" property="scorePoint"/>
+		<result column="TEST_SUCCESS" jdbcType="NUMERIC" property="testSuccess"/>
+	</resultMap>
+
+	<insert id="addExamPaper" keyProperty="examPaperID" useGeneratedKeys="true">
+		INSERT INTO EXAM_PAPER (CODE_CONTENT,COMPILED_SUCCESS,EXAM_PAPER_ID,EXAMINEE_ID,SCORE_POINT,TEST_SUCCESS) VALUES (#{codeContent},#{compiledSuccess},#{examPaperID},#{examineeID},#{scorePoint},#{testSuccess});
+	</insert>
+	
+	<insert id="addExerciseExaminee" keyProperty="exerciseExamineeID" useGeneratedKeys="true">
+		INSERT INTO EXAM_PAPER (EXAM_PAPER_ID,EXERCISE_ID) VALUES (#{examPaperID},#{exerciseID});
+	</insert>
+	
+	<update id="updateExamPaper">
+		update EXAM_PAPER
+		<set>
+			<if test="codeContent != null ">CODE_CONTENT = #{codeContent},</if>
+			<if test="compiledSuccess != null ">COMPILED_SUCCESS = #{compiledSuccess},</if>
+			<if test="examPaperID != null ">EXAM_PAPER_I_D = #{examPaperID},</if>
+			<if test="examineeID != null ">EXAMINEE_I_D = #{examineeID},</if>
+			<if test="scorePoint != null ">SCORE_POINT = #{scorePoint},</if>
+			<if test="testSuccess != null ">TEST_SUCCESS = #{testSuccess},</if>
+		</set>
+		where EXAM_PAPER_ID=#{examPaperID}
+	</update>
+	
+	<delete id="deleteExamPapers">
+		delete from EXAM_PAPER where EXAM_PAPER_ID in
+		<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+		   #{id}
+		</foreach>
+	</delete>
+	
+	<select id="findExerciseByID" resultMap="exercise">
+		SELECT * FROM EXERCISE WHERE EXERCISE_ID=#{exerciseID};
+	</select>
+	
+	<select id="findExercises" resultMap="exercise">
+		SELECT * FROM EXERCISE
+	</select>
+	
+</mapper>
