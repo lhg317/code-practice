@@ -48,7 +48,7 @@
 	
 	<delete id="deleteExercises">
 		delete from EXERCISE where EXERCISE_ID in
-		<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+		<foreach item="id" index="index" collection="userIDs" open="(" separator="," close=")">
 		   #{id}
 		</foreach>
 	</delete>

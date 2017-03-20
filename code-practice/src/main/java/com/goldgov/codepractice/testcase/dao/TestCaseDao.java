@@ -12,6 +12,6 @@ public interface TestCaseDao {
 
 	void addTestCases(@Param("exerciseID") Integer exerciseID,@Param("testCases") List<TestCase> testCases);
 	void updateTestCase(@Param("exerciseID") Integer exerciseID,@Param("testCase") TestCase testCase);
-	void deleteTestCases(Integer[] ids);
+	void deleteTestCase(Integer[] ids);
 	List<TestCase> findTestCases(Integer exerciseID);
 }

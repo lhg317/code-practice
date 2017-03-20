@@ -26,8 +26,8 @@ public class TestCaseServiceImpl implements TestCaseService{
 	}
 
 	@Override
-	public void deleteTestCases(Integer[] ids) {
-		testCaseDao.deleteTestCases(ids);
+	public void deleteTestCase(Integer[] ids) {
+		testCaseDao.deleteTestCase(ids);
 	}
 
 	@Override
