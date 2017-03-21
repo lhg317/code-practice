@@ -1,7 +1,5 @@
 package com.goldgov.codepractice.exampaper.service;
 
-import com.goldgov.codepractice.exercise.service.Exercise;
-
 public class ExamPaper {
 
 	private Integer examPaperID;
@@ -11,12 +9,8 @@ public class ExamPaper {
     private Boolean testSuccess;
     private Integer scorePoint;
     
-    private Exercise exercise;
+    private Integer exerciseID;
     
-    public ExamPaper(){
-    	exercise = new Exercise();
-    }
-
 	public Integer getExamPaperID() {
 		return examPaperID;
 	}
@@ -65,18 +59,12 @@ public class ExamPaper {
 		this.scorePoint = scorePoint;
 	}
 
-	public Exercise getExercise() {
-		return exercise;
+	public Integer getExerciseID() {
+		return exerciseID;
 	}
 
-	public void setExercise(Exercise exercise) {
-		this.exercise = exercise;
-	}
-    
-	public Integer getExerciseID() {
-		return getExercise().getExerciseID();
-	}
 	public void setExerciseID(Integer exerciseID) {
-		getExercise().setExerciseID(exerciseID);
+		this.exerciseID = exerciseID;
 	}
+
 }

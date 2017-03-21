@@ -9,7 +9,10 @@ import com.goldgov.codepractice.exampaper.dao.ExamPaperDao;
 import com.goldgov.codepractice.exampaper.service.ExamPaper;
 import com.goldgov.codepractice.exampaper.service.ExamPaperQuery;
 import com.goldgov.codepractice.exampaper.service.ExamPaperService;
+import com.goldgov.codepractice.exampaper.service.ExamPaperShow;
 import com.goldgov.codepractice.exampaper.service.ExerciseExaminee;
+import com.goldgov.codepractice.exercise.service.Exercise;
+import com.goldgov.codepractice.exercise.service.ExerciseService;
 
 @Service
 public class ExamPaperServiceImpl implements ExamPaperService{
@@ -17,6 +20,8 @@ public class ExamPaperServiceImpl implements ExamPaperService{
 	@Autowired
 	private ExamPaperDao examPaperDao;
 	
+	@Autowired
+	private ExerciseService exerciseService;
 
 	@Override
 	public void addExamPaper(ExamPaper examPaper) {
@@ -35,9 +40,13 @@ public class ExamPaperServiceImpl implements ExamPaperService{
 	}
 
 	@Override
-	public ExamPaper findExamPaperByID(Integer id) {
-		ExamPaper examPaper = examPaperDao.findExamPaperByID(id);
-		return examPaper;
+	public ExamPaperShow findExamPaper(Integer exerciseID,String examineeID) {
+		ExamPaper examPaper = examPaperDao.findExamPaper(exerciseID,examineeID);
+		Exercise exercise = exerciseService.findExerciseByID(exerciseID);
+		ExamPaperShow examPaperShow = new ExamPaperShow();
+		examPaperShow.setExamPaper(examPaper);
+		examPaperShow.setExercise(exercise);
+		return examPaperShow;
 	}
 
 	@Override

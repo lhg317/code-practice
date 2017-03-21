@@ -18,7 +18,7 @@ public class RpcExamPaperService {
 
     public void updateExamPaper(RpcExamPaper examPaper) throws org.apache.thrift.TException;
 
-    public RpcExamPaper findExamPaperByID(int id) throws org.apache.thrift.TException;
+    public RpcExamPaper findExamPaper(int exerciseID, java.lang.String examineeID) throws org.apache.thrift.TException;
 
     public RpcExamPaperQuery findExamPapers(RpcExamPaperQuery query) throws org.apache.thrift.TException;
 
@@ -32,7 +32,7 @@ public class RpcExamPaperService {
 
     public void updateExamPaper(RpcExamPaper examPaper, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
-    public void findExamPaperByID(int id, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler) throws org.apache.thrift.TException;
+    public void findExamPaper(int exerciseID, java.lang.String examineeID, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler) throws org.apache.thrift.TException;
 
     public void findExamPapers(RpcExamPaperQuery query, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaperQuery> resultHandler) throws org.apache.thrift.TException;
 
@@ -118,27 +118,28 @@ public class RpcExamPaperService {
       return;
     }
 
-    public RpcExamPaper findExamPaperByID(int id) throws org.apache.thrift.TException
+    public RpcExamPaper findExamPaper(int exerciseID, java.lang.String examineeID) throws org.apache.thrift.TException
     {
-      send_findExamPaperByID(id);
-      return recv_findExamPaperByID();
+      send_findExamPaper(exerciseID, examineeID);
+      return recv_findExamPaper();
     }
 
-    public void send_findExamPaperByID(int id) throws org.apache.thrift.TException
+    public void send_findExamPaper(int exerciseID, java.lang.String examineeID) throws org.apache.thrift.TException
     {
-      findExamPaperByID_args args = new findExamPaperByID_args();
-      args.setId(id);
-      sendBase("findExamPaperByID", args);
+      findExamPaper_args args = new findExamPaper_args();
+      args.setExerciseID(exerciseID);
+      args.setExamineeID(examineeID);
+      sendBase("findExamPaper", args);
     }
 
-    public RpcExamPaper recv_findExamPaperByID() throws org.apache.thrift.TException
+    public RpcExamPaper recv_findExamPaper() throws org.apache.thrift.TException
     {
-      findExamPaperByID_result result = new findExamPaperByID_result();
-      receiveBase(result, "findExamPaperByID");
+      findExamPaper_result result = new findExamPaper_result();
+      receiveBase(result, "findExamPaper");
       if (result.isSetSuccess()) {
         return result.success;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "findExamPaperByID failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "findExamPaper failed: unknown result");
     }
 
     public RpcExamPaperQuery findExamPapers(RpcExamPaperQuery query) throws org.apache.thrift.TException
@@ -278,24 +279,27 @@ public class RpcExamPaperService {
       }
     }
 
-    public void findExamPaperByID(int id, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler) throws org.apache.thrift.TException {
+    public void findExamPaper(int exerciseID, java.lang.String examineeID, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      findExamPaperByID_call method_call = new findExamPaperByID_call(id, resultHandler, this, ___protocolFactory, ___transport);
+      findExamPaper_call method_call = new findExamPaper_call(exerciseID, examineeID, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class findExamPaperByID_call extends org.apache.thrift.async.TAsyncMethodCall<RpcExamPaper> {
-      private int id;
-      public findExamPaperByID_call(int id, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class findExamPaper_call extends org.apache.thrift.async.TAsyncMethodCall<RpcExamPaper> {
+      private int exerciseID;
+      private java.lang.String examineeID;
+      public findExamPaper_call(int exerciseID, java.lang.String examineeID, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.id = id;
+        this.exerciseID = exerciseID;
+        this.examineeID = examineeID;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("findExamPaperByID", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        findExamPaperByID_args args = new findExamPaperByID_args();
-        args.setId(id);
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("findExamPaper", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        findExamPaper_args args = new findExamPaper_args();
+        args.setExerciseID(exerciseID);
+        args.setExamineeID(examineeID);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -306,7 +310,7 @@ public class RpcExamPaperService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_findExamPaperByID();
+        return (new Client(prot)).recv_findExamPaper();
       }
     }
 
@@ -358,7 +362,7 @@ public class RpcExamPaperService {
       processMap.put("addExamPaper", new addExamPaper());
       processMap.put("deleteExamPapers", new deleteExamPapers());
       processMap.put("updateExamPaper", new updateExamPaper());
-      processMap.put("findExamPaperByID", new findExamPaperByID());
+      processMap.put("findExamPaper", new findExamPaper());
       processMap.put("findExamPapers", new findExamPapers());
       return processMap;
     }
@@ -423,22 +427,22 @@ public class RpcExamPaperService {
       }
     }
 
-    public static class findExamPaperByID<I extends Iface> extends org.apache.thrift.ProcessFunction<I, findExamPaperByID_args> {
-      public findExamPaperByID() {
-        super("findExamPaperByID");
+    public static class findExamPaper<I extends Iface> extends org.apache.thrift.ProcessFunction<I, findExamPaper_args> {
+      public findExamPaper() {
+        super("findExamPaper");
       }
 
-      public findExamPaperByID_args getEmptyArgsInstance() {
-        return new findExamPaperByID_args();
+      public findExamPaper_args getEmptyArgsInstance() {
+        return new findExamPaper_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public findExamPaperByID_result getResult(I iface, findExamPaperByID_args args) throws org.apache.thrift.TException {
-        findExamPaperByID_result result = new findExamPaperByID_result();
-        result.success = iface.findExamPaperByID(args.id);
+      public findExamPaper_result getResult(I iface, findExamPaper_args args) throws org.apache.thrift.TException {
+        findExamPaper_result result = new findExamPaper_result();
+        result.success = iface.findExamPaper(args.exerciseID, args.examineeID);
         return result;
       }
     }
@@ -479,7 +483,7 @@ public class RpcExamPaperService {
       processMap.put("addExamPaper", new addExamPaper());
       processMap.put("deleteExamPapers", new deleteExamPapers());
       processMap.put("updateExamPaper", new updateExamPaper());
-      processMap.put("findExamPaperByID", new findExamPaperByID());
+      processMap.put("findExamPaper", new findExamPaper());
       processMap.put("findExamPapers", new findExamPapers());
       return processMap;
     }
@@ -664,20 +668,20 @@ public class RpcExamPaperService {
       }
     }
 
-    public static class findExamPaperByID<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, findExamPaperByID_args, RpcExamPaper> {
-      public findExamPaperByID() {
-        super("findExamPaperByID");
+    public static class findExamPaper<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, findExamPaper_args, RpcExamPaper> {
+      public findExamPaper() {
+        super("findExamPaper");
       }
 
-      public findExamPaperByID_args getEmptyArgsInstance() {
-        return new findExamPaperByID_args();
+      public findExamPaper_args getEmptyArgsInstance() {
+        return new findExamPaper_args();
       }
 
       public org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper>() { 
           public void onComplete(RpcExamPaper o) {
-            findExamPaperByID_result result = new findExamPaperByID_result();
+            findExamPaper_result result = new findExamPaper_result();
             result.success = o;
             try {
               fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
@@ -692,7 +696,7 @@ public class RpcExamPaperService {
           public void onError(java.lang.Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
-            findExamPaperByID_result result = new findExamPaperByID_result();
+            findExamPaper_result result = new findExamPaper_result();
             if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
@@ -720,8 +724,8 @@ public class RpcExamPaperService {
         return false;
       }
 
-      public void start(I iface, findExamPaperByID_args args, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler) throws org.apache.thrift.TException {
-        iface.findExamPaperByID(args.id,resultHandler);
+      public void start(I iface, findExamPaper_args args, org.apache.thrift.async.AsyncMethodCallback<RpcExamPaper> resultHandler) throws org.apache.thrift.TException {
+        iface.findExamPaper(args.exerciseID, args.examineeID,resultHandler);
       }
     }
 
@@ -2668,19 +2672,22 @@ public class RpcExamPaperService {
     }
   }
 
-  public static class findExamPaperByID_args implements org.apache.thrift.TBase<findExamPaperByID_args, findExamPaperByID_args._Fields>, java.io.Serializable, Cloneable, Comparable<findExamPaperByID_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("findExamPaperByID_args");
+  public static class findExamPaper_args implements org.apache.thrift.TBase<findExamPaper_args, findExamPaper_args._Fields>, java.io.Serializable, Cloneable, Comparable<findExamPaper_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("findExamPaper_args");
 
-    private static final org.apache.thrift.protocol.TField ID_FIELD_DESC = new org.apache.thrift.protocol.TField("id", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField EXERCISE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("exerciseID", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField EXAMINEE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("examineeID", org.apache.thrift.protocol.TType.STRING, (short)2);
 
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new findExamPaperByID_argsStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new findExamPaperByID_argsTupleSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new findExamPaper_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new findExamPaper_argsTupleSchemeFactory();
 
-    private int id; // required
+    private int exerciseID; // required
+    private java.lang.String examineeID; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      ID((short)1, "id");
+      EXERCISE_ID((short)1, "exerciseID"),
+      EXAMINEE_ID((short)2, "examineeID");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -2695,8 +2702,10 @@ public class RpcExamPaperService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // ID
-            return ID;
+          case 1: // EXERCISE_ID
+            return EXERCISE_ID;
+          case 2: // EXAMINEE_ID
+            return EXAMINEE_ID;
           default:
             return null;
         }
@@ -2737,75 +2746,114 @@ public class RpcExamPaperService {
     }
 
     // isset id assignments
-    private static final int __ID_ISSET_ID = 0;
+    private static final int __EXERCISEID_ISSET_ID = 0;
     private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.ID, new org.apache.thrift.meta_data.FieldMetaData("id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.EXERCISE_ID, new org.apache.thrift.meta_data.FieldMetaData("exerciseID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.EXAMINEE_ID, new org.apache.thrift.meta_data.FieldMetaData("examineeID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(findExamPaperByID_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(findExamPaper_args.class, metaDataMap);
     }
 
-    public findExamPaperByID_args() {
+    public findExamPaper_args() {
     }
 
-    public findExamPaperByID_args(
-      int id)
+    public findExamPaper_args(
+      int exerciseID,
+      java.lang.String examineeID)
     {
       this();
-      this.id = id;
-      setIdIsSet(true);
+      this.exerciseID = exerciseID;
+      setExerciseIDIsSet(true);
+      this.examineeID = examineeID;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public findExamPaperByID_args(findExamPaperByID_args other) {
+    public findExamPaper_args(findExamPaper_args other) {
       __isset_bitfield = other.__isset_bitfield;
-      this.id = other.id;
+      this.exerciseID = other.exerciseID;
+      if (other.isSetExamineeID()) {
+        this.examineeID = other.examineeID;
+      }
     }
 
-    public findExamPaperByID_args deepCopy() {
-      return new findExamPaperByID_args(this);
+    public findExamPaper_args deepCopy() {
+      return new findExamPaper_args(this);
     }
 
     @Override
     public void clear() {
-      setIdIsSet(false);
-      this.id = 0;
+      setExerciseIDIsSet(false);
+      this.exerciseID = 0;
+      this.examineeID = null;
     }
 
-    public int getId() {
-      return this.id;
+    public int getExerciseID() {
+      return this.exerciseID;
     }
 
-    public void setId(int id) {
-      this.id = id;
-      setIdIsSet(true);
+    public void setExerciseID(int exerciseID) {
+      this.exerciseID = exerciseID;
+      setExerciseIDIsSet(true);
     }
 
-    public void unsetId() {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __ID_ISSET_ID);
+    public void unsetExerciseID() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __EXERCISEID_ISSET_ID);
     }
 
-    /** Returns true if field id is set (has been assigned a value) and false otherwise */
-    public boolean isSetId() {
-      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __ID_ISSET_ID);
+    /** Returns true if field exerciseID is set (has been assigned a value) and false otherwise */
+    public boolean isSetExerciseID() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __EXERCISEID_ISSET_ID);
     }
 
-    public void setIdIsSet(boolean value) {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ID_ISSET_ID, value);
+    public void setExerciseIDIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __EXERCISEID_ISSET_ID, value);
+    }
+
+    public java.lang.String getExamineeID() {
+      return this.examineeID;
+    }
+
+    public void setExamineeID(java.lang.String examineeID) {
+      this.examineeID = examineeID;
+    }
+
+    public void unsetExamineeID() {
+      this.examineeID = null;
+    }
+
+    /** Returns true if field examineeID is set (has been assigned a value) and false otherwise */
+    public boolean isSetExamineeID() {
+      return this.examineeID != null;
+    }
+
+    public void setExamineeIDIsSet(boolean value) {
+      if (!value) {
+        this.examineeID = null;
+      }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
-      case ID:
+      case EXERCISE_ID:
         if (value == null) {
-          unsetId();
+          unsetExerciseID();
         } else {
-          setId((java.lang.Integer)value);
+          setExerciseID((java.lang.Integer)value);
+        }
+        break;
+
+      case EXAMINEE_ID:
+        if (value == null) {
+          unsetExamineeID();
+        } else {
+          setExamineeID((java.lang.String)value);
         }
         break;
 
@@ -2814,8 +2862,11 @@ public class RpcExamPaperService {
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
-      case ID:
-        return getId();
+      case EXERCISE_ID:
+        return getExerciseID();
+
+      case EXAMINEE_ID:
+        return getExamineeID();
 
       }
       throw new java.lang.IllegalStateException();
@@ -2828,8 +2879,10 @@ public class RpcExamPaperService {
       }
 
       switch (field) {
-      case ID:
-        return isSetId();
+      case EXERCISE_ID:
+        return isSetExerciseID();
+      case EXAMINEE_ID:
+        return isSetExamineeID();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -2838,23 +2891,32 @@ public class RpcExamPaperService {
     public boolean equals(java.lang.Object that) {
       if (that == null)
         return false;
-      if (that instanceof findExamPaperByID_args)
-        return this.equals((findExamPaperByID_args)that);
+      if (that instanceof findExamPaper_args)
+        return this.equals((findExamPaper_args)that);
       return false;
     }
 
-    public boolean equals(findExamPaperByID_args that) {
+    public boolean equals(findExamPaper_args that) {
       if (that == null)
         return false;
       if (this == that)
         return true;
 
-      boolean this_present_id = true;
-      boolean that_present_id = true;
-      if (this_present_id || that_present_id) {
-        if (!(this_present_id && that_present_id))
+      boolean this_present_exerciseID = true;
+      boolean that_present_exerciseID = true;
+      if (this_present_exerciseID || that_present_exerciseID) {
+        if (!(this_present_exerciseID && that_present_exerciseID))
           return false;
-        if (this.id != that.id)
+        if (this.exerciseID != that.exerciseID)
+          return false;
+      }
+
+      boolean this_present_examineeID = true && this.isSetExamineeID();
+      boolean that_present_examineeID = true && that.isSetExamineeID();
+      if (this_present_examineeID || that_present_examineeID) {
+        if (!(this_present_examineeID && that_present_examineeID))
+          return false;
+        if (!this.examineeID.equals(that.examineeID))
           return false;
       }
 
@@ -2865,25 +2927,39 @@ public class RpcExamPaperService {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + id;
+      hashCode = hashCode * 8191 + exerciseID;
+
+      hashCode = hashCode * 8191 + ((isSetExamineeID()) ? 131071 : 524287);
+      if (isSetExamineeID())
+        hashCode = hashCode * 8191 + examineeID.hashCode();
 
       return hashCode;
     }
 
     @Override
-    public int compareTo(findExamPaperByID_args other) {
+    public int compareTo(findExamPaper_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetId()).compareTo(other.isSetId());
+      lastComparison = java.lang.Boolean.valueOf(isSetExerciseID()).compareTo(other.isSetExerciseID());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetId()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.id, other.id);
+      if (isSetExerciseID()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.exerciseID, other.exerciseID);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetExamineeID()).compareTo(other.isSetExamineeID());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetExamineeID()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.examineeID, other.examineeID);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -2905,11 +2981,19 @@ public class RpcExamPaperService {
 
     @Override
     public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("findExamPaperByID_args(");
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("findExamPaper_args(");
       boolean first = true;
 
-      sb.append("id:");
-      sb.append(this.id);
+      sb.append("exerciseID:");
+      sb.append(this.exerciseID);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("examineeID:");
+      if (this.examineeID == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.examineeID);
+      }
       first = false;
       sb.append(")");
       return sb.toString();
@@ -2938,15 +3022,15 @@ public class RpcExamPaperService {
       }
     }
 
-    private static class findExamPaperByID_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public findExamPaperByID_argsStandardScheme getScheme() {
-        return new findExamPaperByID_argsStandardScheme();
+    private static class findExamPaper_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public findExamPaper_argsStandardScheme getScheme() {
+        return new findExamPaper_argsStandardScheme();
       }
     }
 
-    private static class findExamPaperByID_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<findExamPaperByID_args> {
+    private static class findExamPaper_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<findExamPaper_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, findExamPaperByID_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, findExamPaper_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2956,10 +3040,18 @@ public class RpcExamPaperService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // ID
+            case 1: // EXERCISE_ID
               if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.id = iprot.readI32();
-                struct.setIdIsSet(true);
+                struct.exerciseID = iprot.readI32();
+                struct.setExerciseIDIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // EXAMINEE_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.examineeID = iprot.readString();
+                struct.setExamineeIDIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -2973,47 +3065,62 @@ public class RpcExamPaperService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, findExamPaperByID_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, findExamPaper_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        oprot.writeFieldBegin(ID_FIELD_DESC);
-        oprot.writeI32(struct.id);
+        oprot.writeFieldBegin(EXERCISE_ID_FIELD_DESC);
+        oprot.writeI32(struct.exerciseID);
         oprot.writeFieldEnd();
+        if (struct.examineeID != null) {
+          oprot.writeFieldBegin(EXAMINEE_ID_FIELD_DESC);
+          oprot.writeString(struct.examineeID);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
 
     }
 
-    private static class findExamPaperByID_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public findExamPaperByID_argsTupleScheme getScheme() {
-        return new findExamPaperByID_argsTupleScheme();
+    private static class findExamPaper_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public findExamPaper_argsTupleScheme getScheme() {
+        return new findExamPaper_argsTupleScheme();
       }
     }
 
-    private static class findExamPaperByID_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<findExamPaperByID_args> {
+    private static class findExamPaper_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<findExamPaper_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, findExamPaperByID_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, findExamPaper_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
-        if (struct.isSetId()) {
+        if (struct.isSetExerciseID()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
-        if (struct.isSetId()) {
-          oprot.writeI32(struct.id);
+        if (struct.isSetExamineeID()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetExerciseID()) {
+          oprot.writeI32(struct.exerciseID);
+        }
+        if (struct.isSetExamineeID()) {
+          oprot.writeString(struct.examineeID);
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, findExamPaperByID_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, findExamPaper_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(1);
+        java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.id = iprot.readI32();
-          struct.setIdIsSet(true);
+          struct.exerciseID = iprot.readI32();
+          struct.setExerciseIDIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.examineeID = iprot.readString();
+          struct.setExamineeIDIsSet(true);
         }
       }
     }
@@ -3023,13 +3130,13 @@ public class RpcExamPaperService {
     }
   }
 
-  public static class findExamPaperByID_result implements org.apache.thrift.TBase<findExamPaperByID_result, findExamPaperByID_result._Fields>, java.io.Serializable, Cloneable, Comparable<findExamPaperByID_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("findExamPaperByID_result");
+  public static class findExamPaper_result implements org.apache.thrift.TBase<findExamPaper_result, findExamPaper_result._Fields>, java.io.Serializable, Cloneable, Comparable<findExamPaper_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("findExamPaper_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
 
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new findExamPaperByID_resultStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new findExamPaperByID_resultTupleSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new findExamPaper_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new findExamPaper_resultTupleSchemeFactory();
 
     private RpcExamPaper success; // required
 
@@ -3098,13 +3205,13 @@ public class RpcExamPaperService {
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, RpcExamPaper.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(findExamPaperByID_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(findExamPaper_result.class, metaDataMap);
     }
 
-    public findExamPaperByID_result() {
+    public findExamPaper_result() {
     }
 
-    public findExamPaperByID_result(
+    public findExamPaper_result(
       RpcExamPaper success)
     {
       this();
@@ -3114,14 +3221,14 @@ public class RpcExamPaperService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public findExamPaperByID_result(findExamPaperByID_result other) {
+    public findExamPaper_result(findExamPaper_result other) {
       if (other.isSetSuccess()) {
         this.success = new RpcExamPaper(other.success);
       }
     }
 
-    public findExamPaperByID_result deepCopy() {
-      return new findExamPaperByID_result(this);
+    public findExamPaper_result deepCopy() {
+      return new findExamPaper_result(this);
     }
 
     @Override
@@ -3191,12 +3298,12 @@ public class RpcExamPaperService {
     public boolean equals(java.lang.Object that) {
       if (that == null)
         return false;
-      if (that instanceof findExamPaperByID_result)
-        return this.equals((findExamPaperByID_result)that);
+      if (that instanceof findExamPaper_result)
+        return this.equals((findExamPaper_result)that);
       return false;
     }
 
-    public boolean equals(findExamPaperByID_result that) {
+    public boolean equals(findExamPaper_result that) {
       if (that == null)
         return false;
       if (this == that)
@@ -3226,7 +3333,7 @@ public class RpcExamPaperService {
     }
 
     @Override
-    public int compareTo(findExamPaperByID_result other) {
+    public int compareTo(findExamPaper_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -3260,7 +3367,7 @@ public class RpcExamPaperService {
 
     @Override
     public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("findExamPaperByID_result(");
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("findExamPaper_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -3298,15 +3405,15 @@ public class RpcExamPaperService {
       }
     }
 
-    private static class findExamPaperByID_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public findExamPaperByID_resultStandardScheme getScheme() {
-        return new findExamPaperByID_resultStandardScheme();
+    private static class findExamPaper_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public findExamPaper_resultStandardScheme getScheme() {
+        return new findExamPaper_resultStandardScheme();
       }
     }
 
-    private static class findExamPaperByID_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<findExamPaperByID_result> {
+    private static class findExamPaper_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<findExamPaper_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, findExamPaperByID_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, findExamPaper_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3334,7 +3441,7 @@ public class RpcExamPaperService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, findExamPaperByID_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, findExamPaper_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3349,16 +3456,16 @@ public class RpcExamPaperService {
 
     }
 
-    private static class findExamPaperByID_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public findExamPaperByID_resultTupleScheme getScheme() {
-        return new findExamPaperByID_resultTupleScheme();
+    private static class findExamPaper_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public findExamPaper_resultTupleScheme getScheme() {
+        return new findExamPaper_resultTupleScheme();
       }
     }
 
-    private static class findExamPaperByID_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<findExamPaperByID_result> {
+    private static class findExamPaper_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<findExamPaper_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, findExamPaperByID_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, findExamPaper_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
         if (struct.isSetSuccess()) {
@@ -3371,7 +3478,7 @@ public class RpcExamPaperService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, findExamPaperByID_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, findExamPaper_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

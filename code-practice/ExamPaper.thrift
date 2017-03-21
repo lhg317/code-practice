@@ -26,7 +26,7 @@ service RpcExamPaperService {
 	void addExamPaper(1:RpcExamPaper examPaper);
 	void deleteExamPapers(1:list<i32> ids);
 	void updateExamPaper(1:RpcExamPaper examPaper);
-	RpcExamPaper findExamPaperByID(1:i32 id);
+	RpcExamPaper findExamPaper(1:i32 exerciseID,2:string examineeID);
 	RpcExamPaperQuery findExamPapers(1:RpcExamPaperQuery query);
 }
 

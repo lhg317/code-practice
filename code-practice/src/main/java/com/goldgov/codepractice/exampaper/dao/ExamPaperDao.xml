@@ -5,17 +5,17 @@
 <mapper namespace="com.goldgov.codepractice.exampaper.dao.ExamPaperDao">
 
 	<resultMap type="com.goldgov.codepractice.exampaper.service.ExamPaper" id="examPaper">
+		<result column="EXAM_PAPER_ID" jdbcType="NUMERIC" property="examPaperID"/>
 		<result column="CODE_CONTENT" jdbcType="VARCHAR" property="codeContent"/>
 		<result column="COMPILED_SUCCESS" jdbcType="NUMERIC" property="compiledSuccess"/>
-		<result column="EXAM_PAPER_ID" jdbcType="NUMERIC" property="examPaperID"/>
 		<result column="EXAMINEE_ID" jdbcType="VARCHAR" property="examineeID"/>
 		<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
 		<result column="SCORE_POINT" jdbcType="NUMERIC" property="scorePoint"/>
 		<result column="TEST_SUCCESS" jdbcType="NUMERIC" property="testSuccess"/>
-		<association property="exercise" resultMap="exercise"/>
+		<!-- <association property="exercise" resultMap="exercise"/> -->
 	</resultMap>
 	
-	<resultMap type="com.goldgov.codepractice.exercise.service.Exercise" id="exercise">
+	<!-- <resultMap type="com.goldgov.codepractice.exercise.service.Exercise" id="exercise">
 		<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
 		<result column="CATEGORY" jdbcType="NUMERIC" property="category"/>
 		<result column="CONSTRAINTS" jdbcType="VARCHAR" property="constraints"/>
@@ -31,7 +31,7 @@
 		<result column="STATEMENT" jdbcType="VARCHAR" property="statement"/>
 		<result column="TIME_LIMIT" jdbcType="NUMERIC" property="timeLimit"/>
 		<result column="TITLE" jdbcType="VARCHAR" property="title"/>
-	</resultMap>
+	</resultMap> -->
 
 	<insert id="addExamPaper" keyProperty="examPaperID" useGeneratedKeys="true">
 		INSERT INTO EXAM_PAPER (CODE_CONTENT,COMPILED_SUCCESS,EXAM_PAPER_ID,EXAMINEE_ID,SCORE_POINT,TEST_SUCCESS) VALUES (#{codeContent},#{compiledSuccess},#{examPaperID},#{examineeID},#{scorePoint},#{testSuccess});
@@ -61,12 +61,12 @@
 		</foreach>
 	</delete>
 	
-	<select id="findExerciseByID" resultMap="exercise">
-		SELECT * FROM EXERCISE WHERE EXERCISE_ID=#{exerciseID};
+	<select id="findExamPaper" resultMap="examPaper">
+		SELECT p.*,ee.EXERCISE_ID FROM EXAM_PAPER p,EXERCISE_EXAMINEE ee WHERE p.EXAM_PAPER_ID=ee.EXAM_PAPER_ID AND ee.EXERCISE_ID=#{exerciseID} AND p.EXAMINEE_ID=#{examineeID};
 	</select>
 	
-	<select id="findExercises" resultMap="exercise">
-		SELECT * FROM EXERCISE
+	<select id="findExamPapers" resultMap="examPaper">
+		SELECT * FROM EXAM_PAPER
 	</select>
 	
 </mapper>

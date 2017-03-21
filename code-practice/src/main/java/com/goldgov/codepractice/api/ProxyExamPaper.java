@@ -16,11 +16,22 @@ public class ProxyExamPaper extends ExamPaper{
 	}
 	
 	public ProxyExamPaper(ExamPaper _examPaper){
+		this();
 		if(_examPaper == null){
 			rpcExamPaper = null;
 			return;
 		}
-		setExerciseID(_examPaper.getExerciseID());
+		int examPaperID = _examPaper.getExamPaperID() == null ? 0:_examPaper.getExamPaperID();
+		setExamPaperID(examPaperID);
+		int scorePoint = _examPaper.getScorePoint() == null ? 0:_examPaper.getScorePoint();
+		setScorePoint(scorePoint);
+		setCodeContent(_examPaper.getCodeContent());
+		boolean compiledSuccess = _examPaper.getCompiledSuccess() == null ? false:_examPaper.getCompiledSuccess();
+		setCompiledSuccess(compiledSuccess);
+		setExamineeID(_examPaper.getExamineeID());
+		boolean testSuccess = _examPaper.getTestSuccess() == null ? false:_examPaper.getTestSuccess();
+		setTestSuccess(testSuccess);
+//		setExercise(_examPaper.getExercise());
 	}
 	
 	

@@ -16,6 +16,6 @@ public interface ExamPaperDao {
 	void addExerciseExaminee(ExerciseExaminee examPaper);
 	void deleteExamPapers(@Param("ids") Integer[] ids);
 	void updateExamPaper(ExamPaper examPaper);
-	ExamPaper findExamPaperByID(@Param("id") Integer id);
+	ExamPaper findExamPaper(@Param("exerciseID") Integer exerciseID,@Param("examineeID") String examineeID);
 	List<ExamPaper> findExamPapers(@Param("query") ExamPaperQuery query);
 }
