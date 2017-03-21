@@ -11,7 +11,7 @@ import java.util.Date;
 
 import org.springframework.cglib.core.ReflectUtils;
 
-import com.goldgov.codepractice.testcase.service.TestCase;
+import com.goldgov.codepractice.exampaper.service.ExamPaper;
 
 @SuppressWarnings("rawtypes")
 public class MyBatisXmlUtils {
@@ -208,9 +208,9 @@ public class MyBatisXmlUtils {
 	
 	public static void main(String[] args) {
 		MyBatisXmlUtils myBatisXmlUtils = new MyBatisXmlUtils();
-//		myBatisXmlUtils.resultMap(TestCase.class, System.out);
-//		myBatisXmlUtils.queryFields(TestCase.class, System.out);
-//		myBatisXmlUtils.insertFields(TestCase.class, System.out);
-		myBatisXmlUtils.updateFields(TestCase.class, System.out);
+//		myBatisXmlUtils.resultMap(ExamPaper.class, System.out);
+//		myBatisXmlUtils.queryFields(ExamPaper.class, System.out);
+//		myBatisXmlUtils.insertFields(ExamPaper.class, System.out);
+		myBatisXmlUtils.updateFields(ExamPaper.class, System.out);
 	}
 }
