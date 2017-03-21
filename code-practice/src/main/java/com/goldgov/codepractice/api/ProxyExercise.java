@@ -1,4 +1,4 @@
-package com.goldgov.codepractice.exercise.api;
+package com.goldgov.codepractice.api;
 
 import java.util.Date;
 

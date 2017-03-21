@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.goldgov.codepractice.exercise.api.RpcExercise;
-import com.goldgov.codepractice.exercise.api.RpcExerciseQuery;
-import com.goldgov.codepractice.exercise.api.RpcExerciseService;
+import com.goldgov.codepractice.api.RpcExercise;
+import com.goldgov.codepractice.api.RpcExerciseQuery;
+import com.goldgov.codepractice.api.RpcExerciseService;
 import com.goldgov.origin.core.web.annotation.ModuleResource;
 import com.goldgov.origin.core.web.token.WebToken;
 import com.goldgov.origin.core.web.token.WebToken.TokenHandleType;

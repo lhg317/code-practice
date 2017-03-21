@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.goldgov.codepractice.testcase.api.RpcTestCase;
-import com.goldgov.codepractice.testcase.api.RpcTestCaseService;
+import com.goldgov.codepractice.api.RpcTestCase;
+import com.goldgov.codepractice.api.RpcTestCaseService;
 import com.goldgov.origin.core.web.token.WebToken;
 import com.goldgov.origin.core.web.token.WebToken.TokenHandleType;
 

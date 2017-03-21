@@ -17,6 +17,7 @@ public class ExamPaperServiceImpl implements ExamPaperService{
 	@Autowired
 	private ExamPaperDao examPaperDao;
 	
+
 	@Override
 	public void addExamPaper(ExamPaper examPaper) {
 		examPaperDao.addExamPaper(examPaper);
@@ -35,7 +36,8 @@ public class ExamPaperServiceImpl implements ExamPaperService{
 
 	@Override
 	public ExamPaper findExamPaperByID(Integer id) {
-		return examPaperDao.findExamPaperByID(id);
+		ExamPaper examPaper = examPaperDao.findExamPaperByID(id);
+		return examPaper;
 	}
 
 	@Override

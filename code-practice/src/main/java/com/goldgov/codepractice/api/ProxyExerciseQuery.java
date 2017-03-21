@@ -1,24 +1,23 @@
-package com.goldgov.codepractice.testcase.api;
+package com.goldgov.codepractice.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.goldgov.codepractice.testcase.service.TestCase;
-import com.goldgov.codepractice.testcase.service.TestCaseQuery;
-import com.goldgov.origin.core.discovery.rpc.ResultSetUtils;
+import com.goldgov.codepractice.exercise.service.Exercise;
+import com.goldgov.codepractice.exercise.service.ExerciseQuery;
 
-public class ProxyTestCaseQuery extends TestCaseQuery{
+public class ProxyExerciseQuery extends ExerciseQuery{
 
-	private RpcTestCaseQuery query;
+	private RpcExerciseQuery query;
 	
-	private TestCaseConverter converter= new TestCaseConverter();
-	
-	public ProxyTestCaseQuery(){
-		query = new RpcTestCaseQuery();
+	public ProxyExerciseQuery(){
+		query = new RpcExerciseQuery();
 	}
 	
-	public ProxyTestCaseQuery(RpcTestCaseQuery query){
+	public ProxyExerciseQuery(RpcExerciseQuery query){
 		this.query = query;
 	}
+	
 
 	@Override
 	public int getPageSize() {
@@ -79,20 +78,27 @@ public class ProxyTestCaseQuery extends TestCaseQuery{
 	public void setMinPage(int minPage) {
 		query.setMinPage(minPage);
 	}
-	
+
 	@Override
-	public List<TestCase> getResultList() {
-		List<RpcTestCase> rpcObjectList = query.getResultList();
-		return ResultSetUtils.convertFormRpc(rpcObjectList, converter);
+	public List<Exercise> getResultList() {
+		List<RpcExercise> rpcObjectList = query.getResultList();
+		List<Exercise> resultList = new ArrayList<>(rpcObjectList.size());
+		for (RpcExercise rpcObject : rpcObjectList) {
+			resultList.add(new ProxyExercise(rpcObject));
+		}
+		return resultList;
 	}
 
 	@Override
-	public void setResultList(List<TestCase> resultList) {
-		List<RpcTestCase> rpcObjectList = ResultSetUtils.convertToRpc(resultList, converter);
+	public void setResultList(List<Exercise> resultList) {
+		List<RpcExercise> rpcObjectList = new ArrayList<>(resultList.size());
+		for (Exercise user : resultList) {
+			rpcObjectList.add(new ProxyExercise(user).toRpcObject());
+		}
 		query.setResultList(rpcObjectList);
 	}
 	
-	public RpcTestCaseQuery toRpcQuery(){
+	public RpcExerciseQuery toRpcQuery(){
 		return query;
 	}
 }

@@ -4,22 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goldgov.codepractice.exercise.dao.ExerciseDao">
 	<resultMap type="com.goldgov.codepractice.exercise.service.Exercise" id="exercise">
-	<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
-	<result column="CATEGORY" jdbcType="NUMERIC" property="category"/>
-	<result column="CONSTRAINTS" jdbcType="VARCHAR" property="constraints"/>
-	<result column="DEFINITION_CLASS" jdbcType="VARCHAR" property="definitionClass"/>
-	<result column="DEFINITION_METHOD" jdbcType="VARCHAR" property="definitionMethod"/>
-	<result column="DEFINITION_PARAMS" jdbcType="VARCHAR" property="definitionParams"/>
-	<result column="DEFINITION_RETURN" jdbcType="VARCHAR" property="definitionReturn"/>
-	<result column="DIFFICULTY" jdbcType="NUMERIC" property="difficulty"/>
-	<result column="EXAMPLE" jdbcType="VARCHAR" property="example"/>
-	<result column="NOTE" jdbcType="VARCHAR" property="note"/>
-	<result column="PUBLISH_DATE" jdbcType="TIMESTAMP" property="publishDate"/>
-	<result column="SCORE_POINT" jdbcType="NUMERIC" property="scorePoint"/>
-	<result column="STATEMENT" jdbcType="VARCHAR" property="statement"/>
-	<result column="TIME_LIMIT" jdbcType="NUMERIC" property="timeLimit"/>
-	<result column="TITLE" jdbcType="VARCHAR" property="title"/>
-</resultMap>
+		<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
+		<result column="CATEGORY" jdbcType="NUMERIC" property="category"/>
+		<result column="CONSTRAINTS" jdbcType="VARCHAR" property="constraints"/>
+		<result column="DEFINITION_CLASS" jdbcType="VARCHAR" property="definitionClass"/>
+		<result column="DEFINITION_METHOD" jdbcType="VARCHAR" property="definitionMethod"/>
+		<result column="DEFINITION_PARAMS" jdbcType="VARCHAR" property="definitionParams"/>
+		<result column="DEFINITION_RETURN" jdbcType="VARCHAR" property="definitionReturn"/>
+		<result column="DIFFICULTY" jdbcType="NUMERIC" property="difficulty"/>
+		<result column="EXAMPLE" jdbcType="VARCHAR" property="example"/>
+		<result column="NOTE" jdbcType="VARCHAR" property="note"/>
+		<result column="PUBLISH_DATE" jdbcType="TIMESTAMP" property="publishDate"/>
+		<result column="SCORE_POINT" jdbcType="NUMERIC" property="scorePoint"/>
+		<result column="STATEMENT" jdbcType="VARCHAR" property="statement"/>
+		<result column="TIME_LIMIT" jdbcType="NUMERIC" property="timeLimit"/>
+		<result column="TITLE" jdbcType="VARCHAR" property="title"/>
+	</resultMap>
 
 	<insert id="addExercise" keyProperty="exerciseID" useGeneratedKeys="true">
 		INSERT INTO EXERCISE (CATEGORY,CONSTRAINTS,DEFINITION_CLASS,DEFINITION_METHOD,DEFINITION_PARAMS,DEFINITION_RETURN,DIFFICULTY,EXAMPLE,NOTE,PUBLISH_DATE,SCORE_POINT,STATEMENT,TIME_LIMIT,TITLE) VALUES (#{category},#{constraints},#{definitionClass},#{definitionMethod},#{definitionParams},#{definitionReturn},#{difficulty},#{example},#{note},#{publishDate},#{scorePoint},#{statement},#{timeLimit},#{title});

@@ -1,4 +1,4 @@
-namespace java com.goldgov.codepractice.testcase.api
+namespace java com.goldgov.codepractice.api
 
 struct RpcTestCase {
 	1: i32 testCaseID;

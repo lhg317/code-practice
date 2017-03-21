@@ -1,4 +1,4 @@
-package com.goldgov.codepractice.testcase.api;
+package com.goldgov.codepractice.api;
 
 import org.springframework.stereotype.Component;
 

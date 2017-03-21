@@ -1,4 +1,4 @@
-package com.goldgov.codepractice.testcase.api;
+package com.goldgov.codepractice.api;
 
 import com.goldgov.codepractice.testcase.service.TestCase;
 

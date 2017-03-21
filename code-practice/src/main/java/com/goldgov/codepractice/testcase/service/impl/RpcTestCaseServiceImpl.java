@@ -5,16 +5,16 @@ import java.util.List;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.goldgov.codepractice.testcase.api.ProxyTestCase;
-import com.goldgov.codepractice.testcase.api.RpcTestCase;
-import com.goldgov.codepractice.testcase.api.TestCaseConverter;
+import com.goldgov.codepractice.api.ProxyTestCase;
+import com.goldgov.codepractice.api.RpcTestCase;
+import com.goldgov.codepractice.api.TestCaseConverter;
 import com.goldgov.codepractice.testcase.service.TestCase;
 import com.goldgov.codepractice.testcase.service.TestCaseService;
 import com.goldgov.origin.core.discovery.rpc.ResultSetUtils;
 import com.goldgov.origin.core.discovery.rpc.RpcService;
 
 @RpcService
-public class RpcTestCaseServiceImpl implements com.goldgov.codepractice.testcase.api.RpcTestCaseService.Iface{
+public class RpcTestCaseServiceImpl implements com.goldgov.codepractice.api.RpcTestCaseService.Iface{
 
 	@Autowired
 	private TestCaseService testCaseService;

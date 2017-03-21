@@ -12,6 +12,25 @@
 		<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
 		<result column="SCORE_POINT" jdbcType="NUMERIC" property="scorePoint"/>
 		<result column="TEST_SUCCESS" jdbcType="NUMERIC" property="testSuccess"/>
+		<association property="exercise" resultMap="exercise"/>
+	</resultMap>
+	
+	<resultMap type="com.goldgov.codepractice.exercise.service.Exercise" id="exercise">
+		<result column="EXERCISE_ID" jdbcType="NUMERIC" property="exerciseID"/>
+		<result column="CATEGORY" jdbcType="NUMERIC" property="category"/>
+		<result column="CONSTRAINTS" jdbcType="VARCHAR" property="constraints"/>
+		<result column="DEFINITION_CLASS" jdbcType="VARCHAR" property="definitionClass"/>
+		<result column="DEFINITION_METHOD" jdbcType="VARCHAR" property="definitionMethod"/>
+		<result column="DEFINITION_PARAMS" jdbcType="VARCHAR" property="definitionParams"/>
+		<result column="DEFINITION_RETURN" jdbcType="VARCHAR" property="definitionReturn"/>
+		<result column="DIFFICULTY" jdbcType="NUMERIC" property="difficulty"/>
+		<result column="EXAMPLE" jdbcType="VARCHAR" property="example"/>
+		<result column="NOTE" jdbcType="VARCHAR" property="note"/>
+		<result column="PUBLISH_DATE" jdbcType="TIMESTAMP" property="publishDate"/>
+		<result column="SCORE_POINT" jdbcType="NUMERIC" property="scorePoint"/>
+		<result column="STATEMENT" jdbcType="VARCHAR" property="statement"/>
+		<result column="TIME_LIMIT" jdbcType="NUMERIC" property="timeLimit"/>
+		<result column="TITLE" jdbcType="VARCHAR" property="title"/>
 	</resultMap>
 
 	<insert id="addExamPaper" keyProperty="examPaperID" useGeneratedKeys="true">

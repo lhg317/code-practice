@@ -1,4 +1,4 @@
-namespace java com.goldgov.codepractice.exercise.api
+namespace java com.goldgov.codepractice.api
 
 struct RpcExercise {
 	1: i32 exerciseID;
